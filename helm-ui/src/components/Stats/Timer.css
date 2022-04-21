@@ -1,0 +1,15 @@
+.Timer {
+}
+
+.Timer span {
+    font-size: 3em;
+    color: #ffffff;
+}
+
+.Timer span.graal {
+    color: #ff9900;
+}
+
+.Timer span.hotspot {
+    color: #9999ff;
+}

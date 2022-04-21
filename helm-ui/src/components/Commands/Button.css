@@ -1,0 +1,27 @@
+.lcars-button {
+    width: 200px;
+    height: 40px;
+    float: right;
+    margin: 5px;
+    padding-top: 5px;
+    border-radius: 30px;
+    text-align: center;
+    font-size: 1.7em;
+    cursor: pointer;
+}
+
+.lcars-button:hover {
+    color: #fff;
+}
+
+.lcars-button.button-1 {
+    background-color: #cc99cc;
+}
+
+.lcars-button.button-2 {
+    background-color: #ff9900;
+}
+
+.lcars-button.button-3 {
+    background-color: #ffcc99;
+}

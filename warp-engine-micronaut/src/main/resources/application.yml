@@ -1,0 +1,15 @@
+micronaut:
+  application:
+    name: warpEngine
+netty:
+  default:
+    allocator:
+      max-order: 3
+warp:
+  planet-min-esi: 0.8
+  universe-filename: universe.dat
+  universe-mode: generateUniformed
+  ref-mass-min: 0.08
+  ref-mass-max: 1.4
+  ref-temp-min: 2400
+  ref-temp-max: 7500

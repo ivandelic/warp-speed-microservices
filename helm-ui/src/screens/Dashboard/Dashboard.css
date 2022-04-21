@@ -1,0 +1,72 @@
+.dashboard {
+  height: 100%;
+  position: relative;
+  background-position: 5px 230px;
+  background-repeat: no-repeat repeat;
+  overflow: hidden;
+}
+
+.wrapper-5px {
+  padding: 5px 5px 0 5px;
+}
+
+.lcars-top {
+  width: 100%;
+  height: 200px;
+  background-color: #262626;
+  background-image: url(../../images/lcars-top.svg);
+  background-position: 5px 0;
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 5px;
+  left: 0;
+}
+
+.lcars-top .extender-x-1 {
+  width: 100%;
+  height: 9px;
+  background-color: #ff9900;
+  position: absolute;
+  top: 191px;
+  left: 1034px;
+}
+
+.lcars-top .extender-x-2 {
+  width: 100%;
+  height: 16px;
+  background-color: #cc99cc;
+  position: absolute;
+  top: 205px;
+  left: 1034px;
+}
+
+.button-holder {
+  position: absolute;
+  bottom: 15px;
+  right: 0;
+  margin-left: 150px;
+}
+
+.stats-holder {
+  position: absolute;
+  bottom: 15px;
+  right: left;
+  margin-left: 150px;
+}
+
+.lcars-down {
+  height: 100%;
+  background-color: #262626;
+  background-image: url(../../images/lcars-down.svg);
+  background-repeat: no-repeat;
+  background-position: 5px 210px;
+}
+
+.lcars-down .extender-y {
+  width: 128px;
+  height: 100%;
+  background-color: #ff9900;
+  position: absolute;
+  top: 680px;
+  left: 5px;
+}
