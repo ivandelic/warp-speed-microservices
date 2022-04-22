@@ -25,6 +25,7 @@ class Galaxy extends Component {
     render() {
         var linesHotspot = [];
         var linesGraal = [];
+        var linesNative = [];
 
         if (this.props.trajectoriesHotspot && this.props.trajectoriesHotspot.length > 0) {
             for (var i = 0; i < this.props.trajectoriesHotspot.length; i++) {
@@ -35,6 +36,12 @@ class Galaxy extends Component {
         if (this.props.trajectoriesGraal && this.props.trajectoriesGraal.length > 0) {
             for (i = 0; i < this.props.trajectoriesGraal.length; i++) {
                 linesGraal.push(this.createTrajectoryLine(this.props.trajectoriesGraal[i].starStart, this.props.trajectoriesGraal[i].starEnd, '#ff9900', 'graal' + i, -2.0));
+            }
+        }
+
+        if (this.props.trajectoriesNative && this.props.trajectoriesNative.length > 0) {
+            for (i = 0; i < this.props.trajectoriesNative.length; i++) {
+                linesNative.push(this.createTrajectoryLine(this.props.trajectoriesNative[i].starStart, this.props.trajectoriesNative[i].starEnd, '#49c17d', 'native' + i, -4.0));
             }
         }
 
@@ -60,6 +67,7 @@ class Galaxy extends Component {
                 <rect width="100%" height="100%" fill="#262626"></rect>
                     {linesHotspot}
                     {linesGraal}
+                    {linesNative}
                     <circle cx="676.7672874773058" cy="597.1612764655976" r="3.0788920676038387" fill="#FFFFFF" fillOpacity="0.4443456812210784"></circle>
                     <circle cx="550.9048189247725" cy="1908.641154624277" r="2.2492889685502178" fill="#FFFFFF" fillOpacity="0.34770630157730875"></circle>
                     <circle cx="1905.714954547502" cy="793.5792947879014" r="0.27192093837681997" fill="#FFFFFF" fillOpacity="0.18006828925712481"></circle>
@@ -672,7 +680,8 @@ class Galaxy extends Component {
 Galaxy.propTypes = {
     style: PropTypes.string,
     trajectoriesHotspot: PropTypes.array,
-    trajectoriesGraal: PropTypes.array
+    trajectoriesGraal: PropTypes.array,
+    trajectoriesNative: PropTypes.array
 };
 
 export default Galaxy;

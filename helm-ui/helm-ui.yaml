@@ -26,8 +26,12 @@ spec:
               value: http://warp-engine-graal.micro.ivandelic.com/universe/traverse
             - name: REACT_APP_API_URL_C2
               value: http://warp-engine-c2.micro.ivandelic.com/universe/traverse
+            - name: REACT_APP_API_URL_NATIVE
+              value: http://warp-engine-native.micro.ivandelic.com/universe/traverse
       imagePullSecrets:
         - name: ocirsecret
+      nodeSelector:
+        internal_addr: 10.20.10.89
 ---
 kind: Service
 apiVersion: v1

@@ -1,37 +1,39 @@
 kind: Deployment
 apiVersion: apps/v1
 metadata:
-  name: warp-engine-graal-deployment
+  name: warp-engine-c2-deployment
   labels:
-    app: warp-engine-graal
+    app: warp-engine-c2
 spec:
   selector:
     matchLabels:
-      app: warp-engine-graal
+      app: warp-engine-c2
   replicas: 1
   template:
     metadata:
       labels:
-        app: warp-engine-graal
+        app: warp-engine-c2
         version: v1
     spec:
       containers:
-        - name: warp-engine-graal
-          image: "fra.ocir.io/frsxwtjslf35/warp/warp-engine-graal:latest"
+        - name: warp-engine-c2
+          image: "fra.ocir.io/frsxwtjslf35/warp/warp-engine-c2:latest"
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
       imagePullSecrets:
         - name: ocirsecret
+      nodeSelector:
+        internal_addr: 10.20.10.141
 ---
 kind: Service
 apiVersion: v1
 metadata:
-  name: warp-engine-graal-service
+  name: warp-engine-c2-service
 spec:
   type: ClusterIP
   selector:
-    app: warp-engine-graal
+    app: warp-engine-c2
   ports:
     - port: 8080
       targetPort: 8080
@@ -39,18 +41,18 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: warp-engine-graal-ingress
+  name: warp-engine-c2-ingress
   annotations:
     kubernetes.io/ingress.class: "nginx"
 spec:
   rules:
-    - host: "warp-engine-graal.micro.ivandelic.com"
+    - host: "warp-engine-c2.micro.ivandelic.com"
       http:
         paths:
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: warp-engine-graal-service
+                name: warp-engine-c2-service
                 port:
                   number: 8080

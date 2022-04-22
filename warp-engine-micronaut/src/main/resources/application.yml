@@ -1,6 +1,9 @@
 micronaut:
   application:
     name: warpEngine
+  server:
+    cors:
+      enabled: true
 netty:
   default:
     allocator:
