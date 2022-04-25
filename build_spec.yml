@@ -45,15 +45,15 @@ outputArtifacts:
   - name: warp-engine-micronaut-native
     type: DOCKER_IMAGE
     location: eu-frankfurt-1.ocir.io/frsxwtjslf35/warp/warp-engine-micronaut-native
-  - name: helm-ui.yaml
+  - name: helm-ui_yaml
     type: BINARY
     location: ${OCI_PRIMARY_SOURCE_DIR}/helm-ui/helm-ui.yaml
-  - name: warp-engine-c2.yaml
+  - name: warp-engine-c2_yaml
     type: BINARY
     location: ${OCI_PRIMARY_SOURCE_DIR}/warp-engine-helidon/warp-engine-c2.yaml
-  - name: warp-engine-graal.yaml
+  - name: warp-engine-graal_yaml
     type: BINARY
     location: ${OCI_PRIMARY_SOURCE_DIR}/warp-engine-helidon/warp-engine-graal.yaml
-  - name: warp-engine-native.yaml
+  - name: warp-engine-native_yaml
     type: BINARY
     location: ${OCI_PRIMARY_SOURCE_DIR}/warp-engine-micronaut/warp-engine-native.yaml
