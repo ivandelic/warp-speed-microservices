@@ -1,0 +1,59 @@
+version: 0.1             
+component: build
+timeoutInSeconds: 1000
+shell: bash
+
+env:
+  exportedVariables:
+    - buildId
+
+steps:
+  - type: Command
+    name: "Calculate buildId"
+    command: |
+      buildId=`echo ${OCI_BUILD_RUN_ID} | rev | cut -c 1-6 | rev`
+      echo "Build ID: $buildId"
+  - type: Command
+    name: "helm-ui"
+    command: |
+      docker build -t eu-frankfurt-1.ocir.io/frsxwtjslf35/warp/helm-ui:$buildId ./helm-ui
+  - type: Command
+    name: "warp-engine-c2"
+    command: |
+      docker build -f warp-engine-helidon/warp-engine-c2.Dockerfile -t eu-frankfurt-1.ocir.io/frsxwtjslf35/warp/warp-engine-c2:$buildId ./warp-engine
+  - type: Command
+    name: "warp-engine-c2"
+    command: |
+      docker build -f warp-engine-helidon/warp-engine-graal.Dockerfile -t eu-frankfurt-1.ocir.io/frsxwtjslf35/warp/warp-engine-graal:$buildId ./warp-engine
+  - type: Command
+    name: "warp-engine-c2"
+    command: |
+      warp-engine-micronaut/mvnw package -Dpackaging=docker-native -Pgraalvm
+      image=$(docker images | grep eu-frankfurt-1.ocir.io/frsxwtjslf35/warp/warp-engine-micronaut-native | awk -F ' ' '{print $3}')
+      docker tag $image eu-frankfurt-1.ocir.io/frsxwtjslf35/warp/warp-engine-micronaut-native:$buildId
+
+outputArtifacts:
+  - name: helm-ui
+    type: DOCKER_IMAGE
+    location: eu-frankfurt-1.ocir.io/frsxwtjslf35/warp/helm-ui
+  - name: warp-engine-c2
+    type: DOCKER_IMAGE
+    location: eu-frankfurt-1.ocir.io/frsxwtjslf35/warp/warp-engine-c2
+  - name: warp-engine-graal
+    type: DOCKER_IMAGE
+    location: eu-frankfurt-1.ocir.io/frsxwtjslf35/warp/warp-engine-graal
+  - name: warp-engine-micronaut-native
+    type: DOCKER_IMAGE
+    location: eu-frankfurt-1.ocir.io/frsxwtjslf35/warp/warp-engine-micronaut-native
+  - name: helm-ui.yaml
+    type: BINARY
+    location: ${OCI_PRIMARY_SOURCE_DIR}/helm-ui/helm-ui.yaml
+  - name: warp-engine-c2.yaml
+    type: BINARY
+    location: ${OCI_PRIMARY_SOURCE_DIR}/warp-engine-helidon/warp-engine-c2.yaml
+  - name: warp-engine-graal.yaml
+    type: BINARY
+    location: ${OCI_PRIMARY_SOURCE_DIR}/warp-engine-helidon/warp-engine-graal.yaml
+  - name: warp-engine-native.yaml
+    type: BINARY
+    location: ${OCI_PRIMARY_SOURCE_DIR}/warp-engine-micronaut/warp-engine-native.yaml
