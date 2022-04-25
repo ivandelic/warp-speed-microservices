@@ -28,7 +28,8 @@ steps:
   - type: Command
     name: "warp-engine-native"
     command: |
-      warp-engine-micronaut/mvnw package -Dpackaging=docker-native -Pgraalvm
+      cd warp-engine-micronaut
+      ./mvnw package -Dpackaging=docker-native -Pgraalvm
       image=$(docker images | grep eu-frankfurt-1.ocir.io/frsxwtjslf35/warp/warp-engine-micronaut-native | awk -F ' ' '{print $3}')
       docker tag $image eu-frankfurt-1.ocir.io/frsxwtjslf35/warp/warp-engine-micronaut-native:$buildId
 
