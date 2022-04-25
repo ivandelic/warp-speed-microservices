@@ -20,13 +20,13 @@ steps:
   - type: Command
     name: "warp-engine-c2"
     command: |
-      docker build -f warp-engine-helidon/warp-engine-c2.Dockerfile -t eu-frankfurt-1.ocir.io/frsxwtjslf35/warp/warp-engine-c2:$buildId ./warp-engine
+      docker build -f warp-engine-helidon/warp-engine-c2.Dockerfile -t eu-frankfurt-1.ocir.io/frsxwtjslf35/warp/warp-engine-c2:$buildId ./warp-engine-helidon
   - type: Command
-    name: "warp-engine-c2"
+    name: "warp-engine-graal"
     command: |
-      docker build -f warp-engine-helidon/warp-engine-graal.Dockerfile -t eu-frankfurt-1.ocir.io/frsxwtjslf35/warp/warp-engine-graal:$buildId ./warp-engine
+      docker build -f warp-engine-helidon/warp-engine-graal.Dockerfile -t eu-frankfurt-1.ocir.io/frsxwtjslf35/warp/warp-engine-graal:$buildId ./warp-engine-helidon
   - type: Command
-    name: "warp-engine-c2"
+    name: "warp-engine-native"
     command: |
       warp-engine-micronaut/mvnw package -Dpackaging=docker-native -Pgraalvm
       image=$(docker images | grep eu-frankfurt-1.ocir.io/frsxwtjslf35/warp/warp-engine-micronaut-native | awk -F ' ' '{print $3}')
