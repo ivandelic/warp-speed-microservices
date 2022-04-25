@@ -16,22 +16,32 @@ steps:
   - type: Command
     name: "helm-ui"
     command: |
-      docker build -t eu-frankfurt-1.ocir.io/frsxwtjslf35/warp/helm-ui:$buildId ./helm-ui
+      image_name="eu-frankfurt-1.ocir.io/frsxwtjslf35/warp/helm-ui"
+      docker build -t $image_name ./helm-ui
+      image=$(docker images | grep $image_name | awk -F ' ' '{print $3}')
+      docker tag $image $image_name:$buildId
   - type: Command
     name: "warp-engine-c2"
     command: |
-      docker build -f warp-engine-helidon/warp-engine-c2.Dockerfile -t eu-frankfurt-1.ocir.io/frsxwtjslf35/warp/warp-engine-c2:$buildId ./warp-engine-helidon
+      image_name="eu-frankfurt-1.ocir.io/frsxwtjslf35/warp/warp-engine-c2"
+      docker build -f warp-engine-helidon/warp-engine-c2.Dockerfile -t $image_name ./warp-engine-helidon
+      image=$(docker images | grep $image_name | awk -F ' ' '{print $3}')
+      docker tag $image $image_name:$buildId
   - type: Command
     name: "warp-engine-graal"
     command: |
-      docker build -f warp-engine-helidon/warp-engine-graal.Dockerfile -t eu-frankfurt-1.ocir.io/frsxwtjslf35/warp/warp-engine-graal:$buildId ./warp-engine-helidon
+      image_name="eu-frankfurt-1.ocir.io/frsxwtjslf35/warp/warp-engine-graal"
+      docker build -f warp-engine-helidon/warp-engine-graal.Dockerfile -t $image_name ./warp-engine-helidon
+      image=$(docker images | grep $image_name | awk -F ' ' '{print $3}')
+      docker tag $image $image_name:$buildId
   - type: Command
     name: "warp-engine-native"
     command: |
+      image_name="eu-frankfurt-1.ocir.io/frsxwtjslf35/warp/warp-engine-micronaut-native"
       cd warp-engine-micronaut
       ./mvnw package -Dpackaging=docker-native -Pgraalvm
-      image=$(docker images | grep eu-frankfurt-1.ocir.io/frsxwtjslf35/warp/warp-engine-micronaut-native | awk -F ' ' '{print $3}')
-      docker tag $image eu-frankfurt-1.ocir.io/frsxwtjslf35/warp/warp-engine-micronaut-native:$buildId
+      image=$(docker images | grep $image_name | awk -F ' ' '{print $3}')
+      docker tag $image $image_name:$buildId
 
 outputArtifacts:
   - name: helm-ui
