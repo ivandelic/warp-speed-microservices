@@ -15,8 +15,7 @@
 
     <properties>
         <packaging>jar</packaging>
-        <jdk.version>11</jdk.version>
-        <release.version>11</release.version>
+        <jdk.version>1.8</jdk.version>
         <micronaut.version>3.4.2</micronaut.version>
         <exec.mainClass>com.ivandelic.prototype.warp.Application</exec.mainClass>
         <micronaut.runtime>netty</micronaut.runtime>
