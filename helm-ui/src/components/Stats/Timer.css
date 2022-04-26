@@ -13,3 +13,7 @@
 .Timer span.hotspot {
     color: #9999ff;
 }
+
+.Timer span.native {
+    color: #49c17d;
+}
