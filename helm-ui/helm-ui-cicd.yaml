@@ -30,8 +30,6 @@ spec:
               value: http://warp-engine-native.micro.ivandelic.com/universe/traverse
       imagePullSecrets:
         - name: ocirsecret
-      nodeSelector:
-        component: helm
 ---
 kind: Service
 apiVersion: v1
