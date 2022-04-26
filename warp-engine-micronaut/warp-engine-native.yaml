@@ -8,7 +8,7 @@ spec:
   selector:
     matchLabels:
       app: warp-engine-native
-  replicas: 1
+  replicas: 25
   template:
     metadata:
       labels:
@@ -21,10 +21,11 @@ spec:
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
+      env:
       imagePullSecrets:
         - name: ocirsecret
       nodeSelector:
-        internal_addr: 10.20.10.61
+        component: native
 ---
 kind: Service
 apiVersion: v1

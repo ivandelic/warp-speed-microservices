@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: helm-ui
-          image: "fra.ocir.io/frsxwtjslf35/warp/helm-ui:latest"
+          image: "fra.ocir.io/frsxwtjslf35/warp/helm-ui:${buildId}"
           imagePullPolicy: Always
           ports:
             - containerPort: 3000
@@ -31,7 +31,7 @@ spec:
       imagePullSecrets:
         - name: ocirsecret
       nodeSelector:
-        component: helm 
+        component: helm
 ---
 kind: Service
 apiVersion: v1

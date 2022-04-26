@@ -1,39 +1,40 @@
 kind: Deployment
 apiVersion: apps/v1
 metadata:
-  name: warp-engine-c2-deployment
+  name: warp-engine-native-deployment
   labels:
-    app: warp-engine-c2
+    app: warp-engine-native
 spec:
   selector:
     matchLabels:
-      app: warp-engine-c2
+      app: warp-engine-native
   replicas: 1
   template:
     metadata:
       labels:
-        app: warp-engine-c2
+        app: warp-engine-native
         version: v1
     spec:
       containers:
-        - name: warp-engine-c2
-          image: "fra.ocir.io/frsxwtjslf35/warp/warp-engine-c2:latest"
+        - name: warp-engine-native
+          image: "fra.ocir.io/frsxwtjslf35/warp/warp-engine-micronaut-native:${buildId}"
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
+      env:
       imagePullSecrets:
         - name: ocirsecret
       nodeSelector:
-        component: c2
+        component: native
 ---
 kind: Service
 apiVersion: v1
 metadata:
-  name: warp-engine-c2-service
+  name: warp-engine-native-service
 spec:
   type: ClusterIP
   selector:
-    app: warp-engine-c2
+    app: warp-engine-native
   ports:
     - port: 8080
       targetPort: 8080
@@ -41,18 +42,18 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: warp-engine-c2-ingress
+  name: warp-engine-native-ingress
   annotations:
     kubernetes.io/ingress.class: "nginx"
 spec:
   rules:
-    - host: "warp-engine-c2.micro.ivandelic.com"
+    - host: "warp-engine-native.micro.ivandelic.com"
       http:
         paths:
           - path: /
             pathType: Prefix
             backend:
               service:
-                name: warp-engine-c2-service
+                name: warp-engine-native-service
                 port:
                   number: 8080

@@ -1,5 +1,12 @@
 # Warp Speed Microservices
 
+Label nodes with proper components, so we can stick pods with specific warp engine to specified ones.
+```
+kubectl label nodes <node1_ip1> component=graal
+kubectl label nodes <node1_ip2> component=c2
+kubectl label nodes <node1_ip3> component=native
+```
+
 ## Frontend (Helm UI)
 
 ```

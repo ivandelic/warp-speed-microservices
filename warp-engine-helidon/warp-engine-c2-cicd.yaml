@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: warp-engine-c2
-          image: "fra.ocir.io/frsxwtjslf35/warp/warp-engine-c2:latest"
+          image: "fra.ocir.io/frsxwtjslf35/warp/warp-engine-c2:${buildId}"
           imagePullPolicy: Always
           ports:
             - containerPort: 8080

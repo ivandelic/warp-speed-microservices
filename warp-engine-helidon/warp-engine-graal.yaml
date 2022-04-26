@@ -24,7 +24,7 @@ spec:
       imagePullSecrets:
         - name: ocirsecret
       nodeSelector:
-        internal_addr: 10.20.10.89
+        component: graal
 ---
 kind: Service
 apiVersion: v1
